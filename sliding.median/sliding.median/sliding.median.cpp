@@ -6,8 +6,10 @@
 using namespace std;
 int main()
 {
+    system("chcp 65001");
+  system("cls");
     int n;
-    string title("Введите ширину окна\n");
+    string title("Р’РІРµРґРёС‚Рµ С€РёСЂРёРЅСѓ РѕРєРЅР°\n");
     cout << title;
     cin >> n;
 }
