@@ -3,16 +3,63 @@
 
 #include <iostream>
 #include <string>
+#include <map>
+#include <set>
 using namespace std;
+int  GetValue()
+{
+	int d;
+	do {
+		cin.clear();
+		cout << "ВВедите целое значение" << endl;
+		cin >> d;
+	} while (!cin.good());
+	return d;
+
+}
 int main()
 {
-    system("chcp 65001");
-  system("cls");
-    int n;
-    string title("Введите ширину окна\n");
-    cout << title;
-    cin >> n;
+	system("chcp 65001");
+	system("cls");
+	int w, n;
+	map<int, int> input;
+	map<int, double> output;
+	cout << "Введите длину ряда" << endl;
+	cin >> n;
+
+	cout << "Введите ширину окна" << endl;
+	cin >> w;
+
+
+	cout << "Введите ряд" << endl;
+	double currentSum = 0.0;
+	for (int i = 0; i < n; i++)
+	{
+		input[i] = GetValue();
+		currentSum += input[i];
+		if (i >= w)
+		{
+			currentSum -= input[i - w];
+		}
+		output[i]= currentSum / 3.0;
+	}
+	cout << "Исходный ряд" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << input[i] << " ";
+	}
+
+	cout << endl;
+
+	cout << "результат" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << output[i] << " ";
+	}
+	cout << endl;
 }
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
