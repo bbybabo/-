@@ -16,3 +16,4 @@ cin >> w;
 cout << "Введите ряд" << endl;
 double currentSum = 0.0;
 for (int i = 0; i < n; i++)
+привет лиза
