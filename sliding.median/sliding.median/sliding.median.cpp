@@ -1,73 +1,43 @@
-// sliding.median.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
-#include <string>
-#include <map>
-#include <set>
-using namespace std;
-int  GetValue()
-{
-	int d;
-	do {
-		cin.clear();
-		cout << "ВВедите целое значение" << endl;
-		cin >> d;
-	} while (!cin.good());
-	return d;
+#include <queue>
+#include <vector>
+#include <iomanip>
 
-}
+using namespace std;
+
 int main()
 {
-	system("chcp 65001");
-	system("cls");
-	int w, n;
-	map<int, int> input;
-	map<int, double> output;
-	cout << "Введите длину ряда" << endl;
-	cin >> n;
+    int width;
+    cin >> width;
+    double current;
+    double windowSum = 0;
+    queue<double> window;
+    vector<double> output;
+    while (cin >> current) {
+        windowSum += current;
+        window.push(current);
+        if (window.size() > width)
+        {
+            windowSum -= window.front();
+            window.pop();
+        }
 
-	cout << "Введите ширину окна" << endl;
-	cin >> w;
+        output.insert(output.cend(), windowSum / width);
 
+        if (cin.peek() == '\n')
+        {
+            cin.clear(ios::eofbit);
+            break;
+        }
 
-	cout << "Введите ряд" << endl;
-	double currentSum = 0.0;
-	for (int i = 0; i < n; i++)
-	{
-		input[i] = GetValue();
-		currentSum += input[i];
-		if (i >= w)
-		{
-			currentSum -= input[i - w];
-		}
-		output[i]= currentSum / 3.0;
-	}
-	cout << "Исходный ряд" << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cout << input[i] << " ";
-	}
+    }
+    for (double r : output)
+    {
+        int precision = 2;
+        if (r >= 1)
+            precision = 3;
+        cout << setprecision(precision) << r << " ";
+    }
 
-	cout << endl;
-
-	cout << "результат" << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cout << output[i] << " ";
-	}
-	cout << endl;
+    cout << std::endl;
 }
-
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
